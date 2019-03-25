@@ -6,42 +6,39 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React,{Component} from 'react';
+import {Text,View} from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>hello  xhb</Text>
-      </View>
-    );
+class Blink extends from Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      isShowingText:true;
+    };
+    
+  }
+  render(){
+    if(!this.state.isShowingText){
+      return null;
+    }else{
+      return({
+        <Text>{this.props.text}</Text>
+      });
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+class BlinkApp extends Component{
+  render(){
+    return(
+      <View>
+        <Blink text="hello xhb" />
+      </View>
+    )
+  }
+}
+// 父组件为BlinkApp 子组件为Blink  
+//父组件上有个text属性  子组件通过this.props.text 获取父组件传过来的值 
+//父组件的内容是 多个子组件 通过<View>组件包裹
+// 子组件 渲染的内容是一个文本组件 
+export default BlinkApp;
